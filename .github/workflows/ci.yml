@@ -1,0 +1,108 @@
+# Intégration continue : à chaque envoi sur main et à chaque demande de fusion, l'application est construite et
+# vérifiée sous Linux et sous Windows — compilation sans avertissement, tests unitaires, couverture des tests,
+# analyse statique (SpotBugs et Find Security Bugs) — puis ses écrans sont parcourus hors écran.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Par défaut, la lecture des sources et rien d'autre : chaque tâche demande ce qu'il lui faut en plus.
+permissions:
+  contents: read
+
+# Un nouvel envoi sur la même branche remplace la vérification en cours.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Construction et tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: JDK 25
+        uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Compilation, tests unitaires, couverture et analyse statique
+        run: ./mvnw --batch-mode --no-transfer-progress verify
+
+      # JavaFX rend les écrans en mémoire : aucun affichage n'est nécessaire
+      - name: Tests de l'interface, hors écran
+        run: >-
+          ./mvnw --batch-mode --no-transfer-progress test
+          -DexcludedGroups= -Dgroups=ui -Dglass.platform=Headless -Dprism.order=sw
+
+      - name: Rapports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rapports-${{ matrix.os }}
+          path: |
+            target/surefire-reports/
+            target/site/jacoco/
+            target/spotbugsXml.xml
+            target/ui-snapshots/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # Une demande de fusion qui ajoute une dépendance connue pour être vulnérable est refusée.
+  dependency-review:
+    name: Dépendances ajoutées
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Examen des dépendances
+        uses: actions/dependency-review-action@bbc44d14a204704ccc493733616cd1e93a0321ec # v5.0.1
+        with:
+          fail-on-severity: moderate
+
+  # GitHub ne lit que le pom.xml : l'arbre complet des dépendances, celles qu'amènent les bibliothèques comprises,
+  # lui est envoyé pour que ses alertes de sécurité (Dependabot) les couvrent aussi.
+  dependency-graph:
+    name: Graphe des dépendances
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: JDK 25
+        uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Envoi du graphe des dépendances
+        uses: advanced-security/maven-dependency-submission-action@a64327a7329c9939cf675e458452febe1894a70c # v6.0.1
