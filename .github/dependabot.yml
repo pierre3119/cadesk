@@ -1,0 +1,26 @@
+# Mises à jour proposées chaque semaine par Dependabot : les bibliothèques et les greffons Maven, et les actions
+# des flux de travail (épinglées par leur empreinte, que Dependabot fait suivre). Une version n'est proposée
+# qu'une semaine après sa parution : le temps qu'une publication malveillante soit repérée et retirée.
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    groups:
+      javafx:
+        patterns: ["org.openjfx:*"]
+      tests:
+        patterns: ["org.junit*", "org.assertj:*"]
+      qualite:
+        patterns: ["org.jacoco:*", "com.github.spotbugs:*", "com.h3xstream.findsecbugs:*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7

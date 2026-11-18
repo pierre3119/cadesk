@@ -1,0 +1,515 @@
+/* Styles propres à l'application. Les couleurs générales viennent du thème AtlantaFX (variables -color-*) ;
+   celles des cinq natures du bilan sont définies ici, en clair puis en sombre (.root.dark). */
+
+.root {
+    -nat-revenus: #1a7f37;    -nat-revenus-solid: #1f8a3f;    -nat-revenus-bg: #eaf6ec;    -nat-revenus-mid: #cdeacf;
+    -nat-fixes: #1f5fa8;      -nat-fixes-solid: #1f5fa8;      -nat-fixes-bg: #ecf4fd;      -nat-fixes-mid: #c8dff8;
+    -nat-variables: #c05f08;  -nat-variables-solid: #dd7714;  -nat-variables-bg: #fff4e5;  -nat-variables-mid: #ffdfb6;
+    -nat-except: #7b3fa0;     -nat-except-solid: #7b3fa0;     -nat-except-bg: #f6eefb;     -nat-except-mid: #e5d2f1;
+    -nat-interne: #57606a;    -nat-interne-solid: #6e7781;    -nat-interne-bg: #f1f3f6;    -nat-interne-mid: #dee3e9;
+    -ink: #1f2a44;
+    /* couleur de la nature courante : redéfinie par les classes .nat-* ci-dessous */
+    -nat: -color-fg-default;  -nat-solid: -color-neutral-emphasis;  -nat-bg: transparent;  -nat-mid: -color-neutral-muted;
+}
+.root.dark {
+    -nat-revenus: #56d364;    -nat-revenus-solid: #238636;    -nat-revenus-bg: rgba(46, 160, 67, 0.16);    -nat-revenus-mid: rgba(46, 160, 67, 0.32);
+    -nat-fixes: #6cb6ff;      -nat-fixes-solid: #1f6feb;      -nat-fixes-bg: rgba(56, 139, 253, 0.16);     -nat-fixes-mid: rgba(56, 139, 253, 0.32);
+    -nat-variables: #f0a858;  -nat-variables-solid: #c9621c;  -nat-variables-bg: rgba(219, 109, 40, 0.18); -nat-variables-mid: rgba(219, 109, 40, 0.34);
+    -nat-except: #c297ff;     -nat-except-solid: #8957e5;     -nat-except-bg: rgba(163, 113, 247, 0.18);   -nat-except-mid: rgba(163, 113, 247, 0.34);
+    -nat-interne: #9aa5b1;    -nat-interne-solid: #6e7681;    -nat-interne-bg: rgba(139, 148, 158, 0.14);  -nat-interne-mid: rgba(139, 148, 158, 0.28);
+    -ink: #3d444d;
+}
+.nat-revenus   { -nat: -nat-revenus;   -nat-solid: -nat-revenus-solid;   -nat-bg: -nat-revenus-bg;   -nat-mid: -nat-revenus-mid; }
+.nat-fixes     { -nat: -nat-fixes;     -nat-solid: -nat-fixes-solid;     -nat-bg: -nat-fixes-bg;     -nat-mid: -nat-fixes-mid; }
+.nat-variables { -nat: -nat-variables; -nat-solid: -nat-variables-solid; -nat-bg: -nat-variables-bg; -nat-mid: -nat-variables-mid; }
+.nat-except    { -nat: -nat-except;    -nat-solid: -nat-except-solid;    -nat-bg: -nat-except-bg;    -nat-mid: -nat-except-mid; }
+.nat-interne   { -nat: -nat-interne;   -nat-solid: -nat-interne-solid;   -nat-bg: -nat-interne-bg;   -nat-mid: -nat-interne-mid; }
+
+/* ---------- barre latérale ---------- */
+.sidebar {
+    -fx-padding: 20 12 14 12;
+    -fx-pref-width: 224;
+    -fx-min-width: 224;
+    -fx-background-color: -color-bg-default;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 0 1 0 0;
+}
+.brand { -fx-padding: 0 6 10 6; }
+.brand-icon {
+    -fx-icon-size: 26;
+    -fx-icon-color: -color-accent-fg;
+}
+.nav-section {
+    -fx-text-fill: -color-fg-subtle;
+    -fx-font-size: 0.8em;
+    -fx-font-weight: bold;
+    -fx-padding: 14 12 4 12;
+}
+.sidebar .nav-item {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 8 12 8 12;
+    -fx-graphic-text-gap: 12;
+    -fx-text-fill: -color-fg-default;
+    -fx-font-size: 1.03em;
+}
+.sidebar .nav-item .ikonli-font-icon {
+    -fx-icon-size: 18;
+    -fx-icon-color: -color-fg-muted;
+}
+.sidebar .nav-item:hover { -fx-background-color: -color-neutral-muted; }
+.sidebar .nav-item:selected {
+    -fx-background-color: -color-accent-subtle;
+    -fx-text-fill: -color-accent-fg;
+    -fx-font-weight: bold;
+}
+.sidebar .nav-item:selected .ikonli-font-icon { -fx-icon-color: -color-accent-fg; }
+.nav-badge {
+    -fx-background-color: -color-warning-emphasis;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 0 7 0 7;
+    -fx-font-size: 0.85em;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.import-button {
+    -fx-padding: 10 12 10 12;
+    -fx-graphic-text-gap: 10;
+}
+.import-option {
+    -fx-padding: 6 4 0 4;
+    -fx-font-size: 0.93em;
+}
+.profile-bar {
+    -fx-padding: 8 4 8 10;
+    -fx-background-color: -color-bg-subtle;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.profile-bar > .ikonli-font-icon {
+    -fx-icon-size: 16;
+    -fx-icon-color: -color-fg-muted;
+}
+.profile-name { -fx-font-weight: bold; }
+
+/* ---------- choix du profil ---------- */
+.chooser {
+    -fx-background-color: -color-bg-subtle;
+    -fx-padding: 40;
+}
+.chooser-card {
+    -fx-padding: 28 30 24 30;
+    -fx-background-color: -color-bg-default;
+    -fx-background-radius: 16;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 16;
+}
+.chooser-card .list-cell { -fx-padding: 8 12 8 12; }
+.chooser-card .list-cell .ikonli-font-icon {
+    -fx-icon-size: 16;
+    -fx-icon-color: -color-fg-muted;
+}
+.avatar {
+    -fx-background-color: -nat-interne-mid;
+    -fx-background-radius: 17;
+    -fx-text-fill: -nat-interne;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+}
+.avatar-admin {
+    -fx-background-color: -nat-except-mid;
+    -fx-text-fill: -nat-except;
+}
+
+/* ---------- profil et assistant ---------- */
+.setting-row {
+    -fx-padding: 10 0 10 0;
+    -fx-border-color: -color-border-muted;
+    -fx-border-width: 1 0 0 0;
+}
+.setting-title { -fx-font-weight: bold; }
+
+/* ---------- contenu ---------- */
+.content { -fx-background-color: -color-bg-subtle; }
+.page {
+    -fx-padding: 22 24 18 24;
+    -fx-spacing: 16;
+}
+.page-body { -fx-padding: 0 14 10 0; }
+.list-body { -fx-padding: 0 12 0 0; }
+.page-scroll, .bilan-scroll {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+.page-scroll > .viewport, .bilan-scroll > .viewport { -fx-background-color: transparent; }
+.card {
+    -fx-background-color: -color-bg-default;
+    -fx-background-radius: 12;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 12;
+    -fx-padding: 16 18 16 18;
+}
+.card-flush { -fx-padding: 8; }
+.card-title {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+}
+.hint {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 0.92em;
+    -fx-font-style: italic;
+}
+.callout {
+    -fx-background-color: -color-warning-subtle;
+    -fx-background-radius: 10;
+    -fx-border-color: -color-warning-muted;
+    -fx-border-radius: 10;
+    -fx-padding: 12 14 12 14;
+}
+.callout > .ikonli-font-icon {
+    -fx-icon-size: 20;
+    -fx-icon-color: -color-warning-fg;
+}
+.empty-text {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-style: italic;
+}
+.clickable { -fx-cursor: hand; }
+
+/* ---------- chiffres clés ---------- */
+.stat {
+    -fx-padding: 12 14 12 14;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+}
+.stat-caption {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 0.85em;
+    -fx-font-weight: bold;
+}
+.stat-value {
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+}
+.stat-note { -fx-text-fill: -color-fg-muted; }
+.kpi {
+    -fx-background-color: -color-bg-default, -nat-bg;
+    -fx-border-color: -nat-mid;
+}
+.kpi .stat-value { -fx-text-fill: -nat; }
+.kpi-soft {
+    -fx-background-color: -color-bg-default;
+    -fx-border-color: -color-border-default;
+}
+.kpi-positive { -nat: -nat-revenus; -nat-bg: -nat-revenus-bg; -nat-mid: -nat-revenus-mid; }
+.kpi-negative { -nat: -color-danger-fg; -nat-bg: -color-danger-subtle; -nat-mid: -color-danger-muted; }
+
+/* ---------- étiquettes et pastilles de nature ---------- */
+.chip {
+    -fx-background-color: -nat-bg;
+    -fx-text-fill: -nat;
+    -fx-background-radius: 10;
+    -fx-padding: 1 9 1 9;
+    -fx-font-size: 0.93em;
+}
+.chip-pending {
+    -fx-background-color: -color-warning-subtle;
+    -fx-text-fill: -color-warning-fg;
+    -fx-border-color: -color-warning-emphasis;
+    -fx-border-radius: 10;
+    -fx-border-style: dashed;
+}
+.dot {
+    -fx-background-color: -nat-solid;
+    -fx-background-radius: 5;
+}
+.swatch {
+    -fx-background-color: -nat-solid;
+    -fx-background-radius: 3;
+}
+.swatch-line {
+    -fx-background-color: -nat-revenus-solid;
+    -fx-background-radius: 2;
+}
+.nature-text { -fx-text-fill: -nat; }
+.legend-name { -fx-font-size: 0.97em; }
+.legend-value {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 0.92em;
+}
+
+/* ---------- tableaux de bilan ---------- */
+.sheet .sheet-cell {
+    -fx-padding: 7 10 7 10;
+    -fx-min-height: 33;
+    -fx-background-color: -color-bg-default;
+    -fx-border-color: -color-border-muted;
+    -fx-border-width: 0 0 1 0;
+}
+.sheet .sheet-header {
+    -fx-background-color: -color-bg-subtle;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-weight: bold;
+    -fx-font-size: 0.93em;
+    -fx-border-color: -color-border-default;
+}
+.sheet .tint { -fx-background-color: -color-bg-default, -nat-bg; }
+.sheet .tint.first {
+    -fx-text-fill: -nat;
+    -fx-font-weight: bold;
+}
+.sheet .group {
+    -fx-background-color: -color-bg-default, -nat-mid;
+    -fx-text-fill: -nat;
+    -fx-font-weight: bold;
+}
+.sheet .total {
+    -fx-background-color: -color-bg-default, -nat-bg;
+    -fx-text-fill: -nat;
+    -fx-font-weight: bold;
+    -fx-border-color: -nat-mid;
+    -fx-border-width: 1 0 1 0;
+}
+.sheet .grand, .sheet .band {
+    -fx-background-color: -nat-solid;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-width: 0;
+}
+.sheet .grand .label { -fx-text-fill: white; -fx-font-weight: bold; }
+.sheet .grand-in, .sheet .band-in { -nat-solid: -nat-revenus-solid; }
+.sheet .grand-out, .sheet .band-out { -nat-solid: -color-danger-emphasis; }
+.sheet .band-info { -nat-solid: -ink; }
+.sheet .result, .sheet .solde {
+    -fx-background-color: -color-bg-subtle;
+    -fx-font-weight: bold;
+    -fx-border-color: -color-border-default;
+    -fx-border-width: 1 0 1 0;
+}
+.sheet .calc {
+    -fx-background-color: -color-bg-subtle;
+    -fx-text-fill: -color-fg-muted;
+}
+.sheet .check { -fx-font-style: italic; }
+.sheet .step.sub {
+    -fx-background-color: -color-bg-subtle;
+    -fx-font-weight: bold;
+}
+.sheet .step.key {
+    -fx-background-color: -color-bg-default, -nat-revenus-mid;
+    -fx-font-weight: bold;
+}
+.sheet .step.info {
+    -fx-background-color: -color-bg-default, -nat-interne-bg;
+    -fx-font-style: italic;
+}
+.sheet .step.item.first, .sheet .indent { -fx-padding: 7 10 7 28; }
+.sheet .strong { -fx-font-weight: bold; }
+.sheet .muted {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-weight: normal;
+}
+.sheet .step.muted {
+    -fx-font-size: 0.93em;
+    -fx-font-style: italic;
+    -fx-font-weight: normal;
+}
+.sheet .link:hover { -fx-underline: true; }
+.sheet .empty {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-style: italic;
+    -fx-alignment: center;
+}
+.sheet .amount-in { -fx-text-fill: -color-success-fg; }
+.sheet .amount-out { -fx-text-fill: -color-danger-fg; }
+.data-bar {
+    -fx-background-color: -nat-mid;
+    -fx-background-radius: 4;
+}
+.data-bar-text { -fx-padding: 1 0 1 7; }
+
+/* bilan mensuel : grille dense, première colonne et titres figés */
+.bilan .sheet-cell {
+    -fx-padding: 5 8 5 8;
+    -fx-min-height: 28;
+    -fx-font-size: 0.95em;
+}
+.bilan .first {
+    -fx-border-color: -color-border-muted -color-border-default -color-border-muted -color-border-muted;
+    -fx-border-width: 0 1 1 0;
+    -fx-padding: 5 8 5 10;
+}
+.bilan .item.first { -fx-padding: 5 8 5 26; }
+.bilan .solde { -fx-font-size: 1.02em; }
+.bilan .band { -fx-font-size: 1.0em; }
+
+/* ---------- graphiques ---------- */
+.donut-arc {
+    -fx-fill: transparent;
+    -fx-stroke: -nat-solid;
+    -fx-stroke-width: 38;
+    -fx-stroke-line-cap: butt;
+}
+.donut-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.donut-caption {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 0.9em;
+}
+.donut-total {
+    -fx-font-size: 1.25em;
+    -fx-font-weight: bold;
+}
+.chart-grid { -fx-stroke: -color-border-muted; }
+.chart-baseline { -fx-stroke: -color-border-default; }
+.chart-axis {
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 0.9em;
+}
+.chart-segment { -fx-fill: -nat-solid; }
+.chart-segment:hover { -fx-opacity: 0.85; }
+.chart-line {
+    -fx-fill: transparent;
+    -fx-stroke: -nat-revenus-solid;
+    -fx-stroke-width: 2.8;
+    -fx-stroke-line-join: round;
+}
+.chart-marker {
+    -fx-fill: -color-bg-default;
+    -fx-stroke: -nat-revenus-solid;
+    -fx-stroke-width: 2.4;
+}
+
+/* ---------- montants ---------- */
+.amount-in { -fx-text-fill: -color-success-fg; }
+.amount-out { -fx-text-fill: -color-danger-fg; }
+.table-view .amount-column { -fx-alignment: CENTER-RIGHT; }
+.manual-mark {
+    -fx-icon-size: 13;
+    -fx-icon-color: -color-fg-muted;
+}
+.check-line {
+    -fx-font-size: 0.92em;
+    -fx-font-style: italic;
+}
+.check-ok { -fx-text-fill: -nat-revenus; }
+.check-ko {
+    -fx-text-fill: -color-danger-fg;
+    -fx-font-weight: bold;
+}
+.choice-nature { -fx-font-weight: bold; }
+.choice-category { -fx-padding: 5 8 5 34; }
+
+/* ---------- catégories et règles ---------- */
+.list-section {
+    -fx-text-fill: -nat;
+    -fx-font-size: 0.82em;
+    -fx-font-weight: bold;
+    -fx-padding: 14 10 4 10;
+}
+.list-row {
+    -fx-padding: 7 10 7 10;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.list-row:hover { -fx-background-color: -color-neutral-muted; }
+.list-row.selected { -fx-background-color: -color-accent-subtle; }
+.list-row.selected > .label {
+    -fx-text-fill: -color-accent-fg;
+    -fx-font-weight: bold;
+}
+.list-row .ikonli-font-icon {
+    -fx-icon-size: 14;
+    -fx-icon-color: -color-fg-muted;
+}
+.rule-card {
+    -fx-padding: 9 10 10 14;
+    -fx-background-color: -color-bg-subtle;
+    -fx-background-radius: 10;
+    -fx-border-color: -color-border-muted;
+    -fx-border-radius: 10;
+}
+.rule-card .ikonli-font-icon { -fx-icon-size: 14; }
+.rule-poste { -fx-font-weight: bold; }
+.rule-poste-auto {
+    -fx-font-weight: normal;
+    -fx-font-style: italic;
+    -fx-text-fill: -color-fg-muted;
+}
+.rule-unused { -fx-text-fill: -color-warning-fg; }
+.keyword {
+    -fx-font-family: "monospace";
+    -fx-font-size: 0.9em;
+    -fx-background-color: -color-bg-default;
+    -fx-background-radius: 6;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 6;
+    -fx-padding: 1 7 1 7;
+}
+.type-badge, .count-badge {
+    -fx-background-color: -color-neutral-muted;
+    -fx-text-fill: -color-fg-muted;
+    -fx-font-size: 0.85em;
+    -fx-padding: 1 8 1 8;
+}
+.type-badge { -fx-background-radius: 6; }
+.count-badge { -fx-background-radius: 10; }
+
+/* ---------- boîtes de dialogue ---------- */
+.form-dialog > .content { -fx-padding: 20 24 12 24; }
+.dialog-summary {
+    -fx-background-color: -color-bg-subtle;
+    -fx-background-radius: 10;
+    -fx-padding: 12 14 12 14;
+}
+.rule-form { -fx-padding: 0 0 0 26; }
+.rule-preview { -fx-text-fill: -color-accent-fg; }
+/* code à saisir sur la page de GitHub */
+.login-code {
+    -fx-font-family: "monospace";
+    -fx-font-size: 1.7em;
+    -fx-font-weight: bold;
+    -fx-background-color: -color-bg-subtle;
+    -fx-background-radius: 8;
+    -fx-padding: 6 16 6 16;
+}
+
+/* ---------- bandeau de message ---------- */
+.notice {
+    -fx-padding: 12 16 12 20;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -color-border-default;
+}
+.notice .ikonli-font-icon { -fx-icon-size: 18; }
+.notice-success { -fx-background-color: -color-success-subtle; }
+.notice-success > .ikonli-font-icon { -fx-icon-color: -color-success-fg; }
+.notice-info { -fx-background-color: -color-accent-subtle; }
+.notice-info > .ikonli-font-icon { -fx-icon-color: -color-accent-fg; }
+.notice-error { -fx-background-color: -color-danger-subtle; }
+.notice-error > .ikonli-font-icon { -fx-icon-color: -color-danger-fg; }
+.notice-guest { -fx-background-color: -nat-except-bg; }
+.notice-guest > .ikonli-font-icon { -fx-icon-color: -nat-except; }
+
+/* ---------- accueil ---------- */
+.welcome {
+    -fx-padding: 40;
+    -fx-background-color: -color-bg-default;
+    -fx-background-radius: 16;
+    -fx-border-color: -color-border-default;
+    -fx-border-radius: 16;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+}
+.welcome-icon {
+    -fx-icon-size: 56;
+    -fx-icon-color: -color-accent-fg;
+}
