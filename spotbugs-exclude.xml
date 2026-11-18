@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ce que l'analyse statique (SpotBugs, Find Security Bugs) signale et qui est voulu. Chaque exclusion dit pourquoi. -->
+<FindBugsFilter xmlns="https://github.com/spotbugs/filter/3.0.0">
+
+  <!-- Scripts de schéma livrés avec l'application (src/main/resources/db/migration) et numéro de version entier :
+       rien n'y vient de l'utilisateur ni d'un fichier. -->
+  <Match>
+    <Class name="io.github.pierre3119.cadesk.db.Database"/>
+    <Method name="~lambda\$apply\$.*"/>
+    <Bug pattern="SQL_INJECTION_JDBC"/>
+  </Match>
+
+  <!-- Suppression des tables au vidage de la base : un nom de table ne se passe pas en paramètre d'une requête ;
+       il est écrit entre guillemets, ses propres guillemets doublés. -->
+  <Match>
+    <Class name="io.github.pierre3119.cadesk.db.Database"/>
+    <Method name="~lambda\$reset\$.*"/>
+    <Bug pattern="SQL_INJECTION_JDBC"/>
+  </Match>
+
+  <!-- Même contrainte pour la table dont on change un rang : seuls les noms de Positions.TABLES sont acceptés. -->
+  <Match>
+    <Class name="io.github.pierre3119.cadesk.db.Positions"/>
+    <Bug pattern="SQL_INJECTION_JDBC"/>
+  </Match>
+
+  <!-- Application de bureau : l'emplacement du rapport PDF est celui que l'utilisateur choisit lui-même dans le
+       sélecteur de fichiers. -->
+  <Match>
+    <Class name="io.github.pierre3119.cadesk.ui.ReportExport"/>
+    <Bug pattern="PATH_TRAVERSAL_IN"/>
+  </Match>
+
+  <!-- Le service d'import travaille sur la base qu'on lui confie : il doit en garder la référence, pas une copie. -->
+  <Match>
+    <Class name="io.github.pierre3119.cadesk.importer.ImportService"/>
+    <Field name="database"/>
+    <Bug pattern="EI_EXPOSE_REP2"/>
+  </Match>
+
+  <!-- Une session donne accès à la base du profil ouvert : c'est son rôle. -->
+  <Match>
+    <Class name="io.github.pierre3119.cadesk.profile.Session"/>
+    <Method name="database"/>
+    <Bug pattern="EI_EXPOSE_REP"/>
+  </Match>
+
+  <!-- JavaFX confie sa fenêtre à l'application, qui la garde pour y afficher ses écrans. -->
+  <Match>
+    <Class name="io.github.pierre3119.cadesk.ui.App"/>
+    <Field name="stage"/>
+    <Bug pattern="EI_EXPOSE_REP2"/>
+  </Match>
+
+</FindBugsFilter>

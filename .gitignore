@@ -1,0 +1,71 @@
+# ----------------------------------------------------------------------------------------------------
+# Données personnelles : rien de bancaire ne doit être versionné.
+# (Pour versionner malgré tout un fichier d'un de ces types, par exemple un relevé fictif : git add -f.)
+# ----------------------------------------------------------------------------------------------------
+
+# Bases des profils, registre des profils, verrous, journaux et copies de sécurité de SQLite
+/data/
+*.db
+*.db-*
+*.db.*
+*.sqlite
+*.sqlite3
+profils.json
+
+# Relevés téléchargés depuis la banque
+*.[cC][sS][vV]
+*.[oO][fF][xX]
+*.[qQ][iI][fF]
+*.[xX][lL][sS]
+*.[xX][lL][sS][xX]
+
+# Rapports et sauvegardes produits par l'application
+*.[pP][dD][fF]
+*.[zZ][iI][pP]
+
+# ----------------------------------------------------------------------------------------------------
+# Ce qui se reconstruit
+# ----------------------------------------------------------------------------------------------------
+
+# Construction, et dossier autonome assemblé par package.sh (il contient aussi des données : app_clean/data)
+/target/
+/app_clean/
+
+# JDK embarqués : téléchargés et vérifiés par scripts/jdk.sh et scripts\jdk.bat (voir jdk.env)
+/jdk/
+
+# Maven Wrapper : mvnw télécharge cette archive si elle est absente
+.mvn/wrapper/maven-wrapper.jar
+
+# ----------------------------------------------------------------------------------------------------
+# Poste de travail
+# ----------------------------------------------------------------------------------------------------
+
+# Environnements de développement
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+nbproject/
+nbactions*.xml
+
+# Journaux, plantages de la JVM, fichiers temporaires et de secours
+*.log
+hs_err_pid*
+replay_pid*
+*.tmp
+*.bak
+*.orig
+*.swp
+*~
+
+# Système (« :Zone.Identifier » : trace laissée sous WSL par un fichier téléchargé avec Windows, adresse d'origine comprise)
+.DS_Store
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
