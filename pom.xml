@@ -38,7 +38,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <javafx.version>27.0.1</javafx.version>
+    <javafx.version>27.0.1.1</javafx.version>
     <atlantafx.version>3.0.0</atlantafx.version>
     <ikonli.version>12.4.0</ikonli.version>
     <sqlite-jdbc.version>3.54.1.0</sqlite-jdbc.version>
